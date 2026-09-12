@@ -21,7 +21,7 @@
     --border-color: rgba(255,255,255,0.04);
     --border-card: rgba(255,255,255,0.04);
     --shadow-card: 0 4px 16px rgba(0,0,0,0.3);
-    --hero-overlay: rgba(0,0,0,0.35);
+    --hero-overlay: rgba(0,0,0,0);
     --hero-text: #ffffff;
     --hero-sub: rgba(255,255,255,0.9);
     --scroll-color: rgba(255,255,255,0.7);
@@ -47,7 +47,7 @@
     --border-color: rgba(0,0,0,0.06);
     --border-card: rgba(0,0,0,0.06);
     --shadow-card: 0 4px 16px rgba(0,0,0,0.06);
-    --hero-overlay: rgba(0,0,0,0.35);
+    --hero-overlay: rgba(0,0,0,0);
     --hero-text: #ffffff;
     --hero-sub: rgba(255,255,255,0.9);
     --scroll-color: rgba(255,255,255,0.7);
@@ -176,10 +176,9 @@
     text-align: center;
     padding: 5rem 2rem 3rem;
     position: relative;
-    background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% 0%, rgba(77,107,251,0.16), transparent 65%),
+      linear-gradient(180deg, #10141f 0%, #0b0b0b 75%);
     transition: all 0.3s ease;
   }
 
