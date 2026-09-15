@@ -680,6 +680,22 @@
     color: #F87171;
   }
 
+  .gen-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .field-hint {
+    font-size: 0.72rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+  }
+
   .version-card.invalid {
     border-color: rgba(248,113,113,0.4);
   }
@@ -1440,28 +1456,40 @@
       <div class="version-card reveal" style="--reveal-delay:0.08s">
         <div class="version-info">
           <span class="ppt-tag">01 提问</span>
-          <input class="gen-input" id="f-question" type="text" placeholder="例如：txtQuestion" autocomplete="off" spellcheck="false" />
+          <div class="gen-field">
+            <input class="gen-input" id="f-question" type="text" placeholder="例如：txtQuestion" autocomplete="off" spellcheck="false" />
+            <span class="field-hint">填写用于用户提问内容的 ActiveX 文本框名称</span>
+          </div>
         </div>
       </div>
 
       <div class="version-card reveal" style="--reveal-delay:0.16s">
         <div class="version-info">
           <span class="ppt-tag">02 回答</span>
-          <input class="gen-input" id="f-answer" type="text" placeholder="例如：txtAnswer" autocomplete="off" spellcheck="false" />
+          <div class="gen-field">
+            <input class="gen-input" id="f-answer" type="text" placeholder="例如：txtAnswer" autocomplete="off" spellcheck="false" />
+            <span class="field-hint">填写用于 DeepSeek 输出内容的 ActiveX 文本框名称</span>
+          </div>
         </div>
       </div>
 
       <div class="version-card reveal" style="--reveal-delay:0.24s">
         <div class="version-info">
           <span class="ppt-tag">03 API</span>
-          <input class="gen-input" id="f-apikey" type="text" placeholder="例如：txtApiKey" autocomplete="off" spellcheck="false" />
+          <div class="gen-field">
+            <input class="gen-input" id="f-apikey" type="text" placeholder="例如：txtApiKey" autocomplete="off" spellcheck="false" />
+            <span class="field-hint">填写你的 DeepSeek 的 API Key</span>
+          </div>
         </div>
       </div>
 
       <div class="version-card reveal" style="--reveal-delay:0.32s">
         <div class="version-info">
           <span class="ppt-tag">04 页码</span>
-          <input class="gen-input" id="f-slide" type="text" inputmode="numeric" placeholder="例如：1" autocomplete="off" spellcheck="false" />
+          <div class="gen-field">
+            <input class="gen-input" id="f-slide" type="text" inputmode="numeric" placeholder="例如：1" autocomplete="off" spellcheck="false" />
+            <span class="field-hint">填写你用于输入和输出的 ActiveX 文本框所在的幻灯片页码</span>
+          </div>
         </div>
       </div>
     </div>
