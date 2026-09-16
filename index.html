@@ -2364,6 +2364,6 @@ window.addEventListener('keydown', (e) => {
 resetGame();
 draw();
 </script>
-<script>(function(){var T='https://caelus-terminal.app.workbuddy.host/api/collect';function t(e,m){try{m=m||{};if(document.title)m.title=String(document.title).replace(/\s*[·|]\s*Caelus Studio.*$/i,'').slice(0,60);var v=localStorage.getItem('caelus_vid');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('caelus_vid',v)}navigator.sendBeacon(T,JSON.stringify({site:'vba',event:e,meta:m,path:location.pathname,ref:document.referrer,vid:v}))}catch(_){}}window.caelusTrack=t;t('page_view');var g=document.getElementById('gen');if(g)g.addEventListener('click',function(){t('generate_click')},true);})();</script>
+<script>(function(){var T='https://caelus-terminal.app.workbuddy.host/api/collect';function t(e,m){try{m=m||{};if(document.title&&!m.title)m.title=String(document.title).replace(/\s*[·|]\s*Caelus Studio.*$/i,'').slice(0,60);var v=localStorage.getItem('caelus_vid');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('caelus_vid',v)}navigator.sendBeacon(T,JSON.stringify({site:'vba',event:e,meta:m,path:location.pathname,ref:document.referrer,vid:v}))}catch(_){}}window.caelusTrack=t;t('page_view');var g=document.getElementById('gen');if(g)g.addEventListener('click',function(){t('generate_click')},true);})();</script>
 </body>
 </html>
