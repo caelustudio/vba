@@ -1969,12 +1969,13 @@
     if (!k) { elApikey.classList.add('invalid');   elApikey.closest('.version-card').classList.add('invalid');   missing.push('API 输入框名称'); }
     if (!s) { elSlide.classList.add('invalid');    elSlide.closest('.version-card').classList.add('invalid');    missing.push('幻灯片号码'); }
 
-    if (missing.length) { showErr('请填写：' + missing.join('、')); return; }
+    if (missing.length) { showErr('请填写：' + missing.join('、')); if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'missing' }); return; }
 
     if (!/^\d+$/.test(s) || parseInt(s, 10) < 1) {
       elSlide.classList.add('invalid');
       elSlide.closest('.version-card').classList.add('invalid');
       showErr('幻灯片号码必须是大于等于 1 的整数。');
+      if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'slide' });
       return;
     }
 
@@ -1988,12 +1989,14 @@
       badName.classList.add('invalid');
       badName.closest('.version-card').classList.add('invalid');
       showErr('控件名称只能包含中文、字母、数字和下划线，且不能以数字开头。');
+      if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'name' });
       return;
     }
 
     render(buildCode({ question: q, answer: a, apikey: k, slide: s }), false);
     elErr.textContent = '';
     elErr.classList.remove('visible');
+    if (window.caelusTrack) caelusTrack('generate_result', { ok: 1 });
   }
 
   btnGen.addEventListener('click', generate);
