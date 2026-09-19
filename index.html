@@ -1964,6 +1964,14 @@
 
   function generate() {
     clearInvalid();
+    var CL = window.caelusLang;
+    var SEP = (CL && CL.cur() === 'en') ? ', ' : '、';
+    var FZ = ['提问输入框名称', '回答存放框名称', 'API 输入框名称', '幻灯片号码'];
+    function lf(zh) {
+      if (!CL) return zh;
+      var arr = CL.msg('fields'), i = FZ.indexOf(zh);
+      return i < 0 ? zh : arr[i];
+    }
 
     var q = vbaStr(elQuestion.value);
     var a = vbaStr(elAnswer.value);
@@ -1976,12 +1984,12 @@
     if (!k) { elApikey.classList.add('invalid');   elApikey.closest('.version-card').classList.add('invalid');   missing.push('API 输入框名称'); }
     if (!s) { elSlide.classList.add('invalid');    elSlide.closest('.version-card').classList.add('invalid');    missing.push('幻灯片号码'); }
 
-    if (missing.length) { showErr('请填写：' + missing.join('、')); if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'missing' }); return; }
+    if (missing.length) { showErr((CL ? CL.msg('fillPrefix') : '请填写：') + missing.map(lf).join(SEP)); if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'missing' }); return; }
 
     if (!/^\d+$/.test(s) || parseInt(s, 10) < 1) {
       elSlide.classList.add('invalid');
       elSlide.closest('.version-card').classList.add('invalid');
-      showErr('幻灯片号码必须是大于等于 1 的整数。');
+      showErr(CL ? CL.msg('slide') : '幻灯片号码必须是大于等于 1 的整数。');
       if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'slide' });
       return;
     }
@@ -1995,7 +2003,7 @@
     if (badName) {
       badName.classList.add('invalid');
       badName.closest('.version-card').classList.add('invalid');
-      showErr('控件名称只能包含中文、字母、数字和下划线，且不能以数字开头。');
+      showErr(CL ? CL.msg('name') : '控件名称只能包含中文、字母、数字和下划线，且不能以数字开头。');
       if (window.caelusTrack) caelusTrack('generate_result', { ok: 0, reason: 'name' });
       return;
     }
@@ -2011,7 +2019,7 @@
   btnReset.addEventListener('click', function() {
     [elQuestion, elAnswer, elApikey, elSlide].forEach(function(el) { el.value = ''; });
     clearInvalid();
-    render('填写上方四项配置后，点击「生成」。', true);
+    render(window.caelusLang ? window.caelusLang.msg('placeholder') : '填写上方四项配置后，点击「生成」。', true);
   });
 
   [elQuestion, elAnswer, elApikey, elSlide].forEach(function(el) {
@@ -2375,5 +2383,6 @@ resetGame();
 draw();
 </script>
 <script>(function(){var T='https://caelus-terminal.app.workbuddy.host/api/collect';function t(e,m){try{m=m||{};if(document.title&&!m.title)m.title=String(document.title).replace(/\s*[·|-]\s*Caelus Studio.*$/i,'').slice(0,60);var v=localStorage.getItem('caelus_vid');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('caelus_vid',v)}navigator.sendBeacon(T,JSON.stringify({site:'vba',event:e,meta:m,path:location.pathname,ref:document.referrer,vid:v}))}catch(_){}}window.caelusTrack=t;t('page_view');var g=document.getElementById('gen');if(g)g.addEventListener('click',function(){t('generate_click')},true);})();</script>
+<script src="i18n.js"></script>
 </body>
 </html>
