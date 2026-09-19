@@ -209,19 +209,22 @@
     font-size: clamp(2rem, 8vw, 6.5rem);
     font-weight: 450;
     letter-spacing: -0.02em;
-    color: var(--hero-text) !important;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    color: #0d2b56 !important;
+    background: linear-gradient(135deg, #eaf6ff 0%, #cbe8ff 50%, #9ecbff 100%);
+    padding: 0.6rem 1.4rem;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(80, 150, 255, 0.25);
+    text-shadow: none;
     margin-bottom: 0.5rem;
     line-height: 1.2;
     max-width: 100%;
     white-space: normal;
     word-break: break-word;
-    padding: 0 0.5rem;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, background 0.3s ease;
   }
 
   [data-theme="light"] .hero-black h1 {
-    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    text-shadow: none;
   }
 
   .hero-black .sub {
