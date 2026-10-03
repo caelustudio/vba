@@ -897,6 +897,9 @@
     color: #fff;
   }
 
+  .nav-links a#navAccount { border: 1px solid var(--border-color); }
+  .nav-links a#navAccount.nav-account--in { background: var(--accent); border-color: var(--accent); color: #fff; }
+
   [data-theme="light"] .site-nav.scrolled .nav-links a { color: rgba(26,26,26,0.6); }
 
   [data-theme="light"] .site-nav.scrolled .nav-links a:hover {
@@ -1325,6 +1328,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
       <li><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">首页</a></li>
       <li><a href="#generator">生成器</a></li>
       <li><a href="#contact">联系</a></li>
+      <li><a href="https://www.caelus.top/account/" id="navAccount">登录</a></li>
     </ul>
     <button class="nav-menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -2407,5 +2411,25 @@ draw();
 <script>(function(){if(window.top!==window.self)return;var T='https://caelus-terminal.app.workbuddy.host/api/collect';function t(e,m){try{m=m||{};if(document.title&&!m.title)m.title=String(document.title).replace(/\s*[·|-]\s*Caelus Studio.*$/i,'').slice(0,60);var v=localStorage.getItem('caelus_vid');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('caelus_vid',v)}navigator.sendBeacon(T,JSON.stringify({site:'vba',event:e,meta:m,path:location.pathname,ref:document.referrer,vid:v}))}catch(_){}}window.caelusTrack=t;t('page_view');var g=document.getElementById('gen');if(g)g.addEventListener('click',function(){t('generate_click')},true);})();</script>
 <script>(function(){if(window.top!==window.self)return;var m=document.cookie.match(/(?:^|;\s*)starid_token=([^;]*)/);var tk=m?decodeURIComponent(m[1]):'';if(!tk){try{tk=localStorage.getItem('starid_token')||''}catch(_){}}if(!tk)return;window.caelusRecord=function(type,meta){try{var p=JSON.stringify(Object.assign({token:tk,path:location.pathname},meta||{}));if(navigator.sendBeacon)navigator.sendBeacon('https://caelus-terminal.app.workbuddy.host/api/record/'+type,new Blob([p],{type:'application/json'}));else fetch('https://caelus-terminal.app.workbuddy.host/api/record/'+type,{method:'POST',headers:{'content-type':'application/json'},body:p,keepalive:true})}catch(_){}}})();</script>
 <script src="i18n.js"></script>
+<script>
+  /* ===== 导航栏账号入口：已登录显示昵称 ===== */
+  (function () {
+    var el = document.getElementById('navAccount');
+    if (!el) return;
+    var m = document.cookie.match(/(?:^|;\s*)starid_token=([^;]*)/);
+    var tk = m ? decodeURIComponent(m[1]) : '';
+    if (!tk) { try { tk = localStorage.getItem('starid_token') || ''; } catch (_) {} }
+    if (!tk) return;
+    fetch('https://caelus-terminal.app.workbuddy.host/api/auth/me', {
+      method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ token: tk })
+    }).then(function (r) { return r.json(); }).then(function (r) {
+      if (!r || !r.ok || !r.user) return;
+      el.textContent = r.user.nickname || String(r.user.email || '').split('@')[0] || '我的';
+      el.setAttribute('data-no-i18n', '');
+      el.classList.add('nav-account--in');
+      el.title = 'Star ID · ' + (r.user.starId || '');
+    }).catch(function () {});
+  })();
+</script>
 </body>
 </html>

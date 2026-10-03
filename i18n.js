@@ -47,6 +47,7 @@
     '跳跃 ·': ['跳跃 ·', '跳躍 ·', 'Jump ·'],
     '重启 ·': ['重启 ·', '重啟 ·', 'Restart ·'],
     '网页由人工智能辅助生成': ['网页由人工智能辅助生成', '網頁由人工智慧輔助生成', 'This website was created with AI assistance'],
+    '登录': ['登录', '登入', 'Sign in'],
   };
 
   /* JS 动态生成的提示文案（多语言版） */
@@ -74,7 +75,9 @@
     if (obs) obs.disconnect();
     try {
       if (!document.body) return;
-      var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (node) { var p = node.parentNode; return (p && (p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE')) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT; } }), n, nodes = [];
+      var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (node) { var p = node.parentNode; if (p && (p.nodeName === 'SCRIPT' || p.nodeName === 'STYLE')) return NodeFilter.FILTER_REJECT;
+        if (p && p.closest && p.closest('[data-no-i18n]')) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT; } }), n, nodes = [];
       while ((n = w.nextNode())) nodes.push(n);
       for (var i = 0; i < nodes.length; i++) {
         if (!ORIG_N.has(nodes[i])) ORIG_N.set(nodes[i], norm(nodes[i].nodeValue));
