@@ -2033,6 +2033,7 @@ h1,h2,h3,h4,h5,h6{font-weight:500 !important;-webkit-text-stroke:.3px currentCol
     elErr.textContent = '';
     elErr.classList.remove('visible');
     if (window.caelusTrack) caelusTrack('generate_result', { ok: 1 });
+    if (window.caelusRecord) caelusRecord('vba', { title: 'VBA 代码生成（幻灯片 ' + s + '）', slide: s, ok: 1 });
   }
 
   btnGen.addEventListener('click', generate);
@@ -2404,6 +2405,7 @@ resetGame();
 draw();
 </script>
 <script>(function(){if(window.top!==window.self)return;var T='https://caelus-terminal.app.workbuddy.host/api/collect';function t(e,m){try{m=m||{};if(document.title&&!m.title)m.title=String(document.title).replace(/\s*[·|-]\s*Caelus Studio.*$/i,'').slice(0,60);var v=localStorage.getItem('caelus_vid');if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('caelus_vid',v)}navigator.sendBeacon(T,JSON.stringify({site:'vba',event:e,meta:m,path:location.pathname,ref:document.referrer,vid:v}))}catch(_){}}window.caelusTrack=t;t('page_view');var g=document.getElementById('gen');if(g)g.addEventListener('click',function(){t('generate_click')},true);})();</script>
+<script>(function(){if(window.top!==window.self)return;var m=document.cookie.match(/(?:^|;\s*)starid_token=([^;]*)/);var tk=m?decodeURIComponent(m[1]):'';if(!tk){try{tk=localStorage.getItem('starid_token')||''}catch(_){}}if(!tk)return;window.caelusRecord=function(type,meta){try{var p=JSON.stringify(Object.assign({token:tk,path:location.pathname},meta||{}));if(navigator.sendBeacon)navigator.sendBeacon('https://caelus-terminal.app.workbuddy.host/api/record/'+type,new Blob([p],{type:'application/json'}));else fetch('https://caelus-terminal.app.workbuddy.host/api/record/'+type,{method:'POST',headers:{'content-type':'application/json'},body:p,keepalive:true})}catch(_){}}})();</script>
 <script src="i18n.js"></script>
 </body>
 </html>
